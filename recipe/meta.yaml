@@ -1,29 +1,27 @@
-{% set version = "0.1.0" %}
-{% set commit = "bcbb04553c06a430192ed6e54f7caade779e7dba" %}
+{% set version = "0.1.1" %}
+{% set commit = "cc684e2e2ee6eea27316b02d32d9b1e3d9ca2554" %}
 
 package:
   name: tikzmagic
   version: {{ version }}
 
 source:
-  fn: {{ commit }}.tar.gz
   url: https://github.com/mkrphys/ipython-tikzmagic/archive/{{ commit }}.tar.gz
-  sha256: db4dab34f419d6931e4870f66d6bc186984ebc0b3371472c2b3d043aedcaa9cd
+  sha256: 4e2373b8b04968b4e3cb5db798331027491db1a965dcba928a89ed2c9302311f
 
 build:
+  number: 0
   noarch: python
-  number: 1
-  script: python -m pip install --no-deps --ignore-installed .
+  script: "{{ PYTHON }} -m pip install . --no-deps -vv"
 
 requirements:
   host:
+    - python >=3
     - pip
-    - python
-    - setuptools
-    - ipython
+    # - ipython
   run:
-    - python
-    - notebook
+    - python >=3
+    - ipython
 
 test:
   imports:
@@ -31,9 +29,9 @@ test:
 
 about:
   home: https://github.com/mkrphys/ipython-tikzmagic
-  license: BSD 3-Clause
+  license: BSD-3-Clause
   license_file: COPYRIGHT
-  summary: 'Notebook magics for generating figures with TikZ.'
+  summary: 'Notebook magics for generating figures with TikZ'
 
 extra:
   recipe-maintainers:
