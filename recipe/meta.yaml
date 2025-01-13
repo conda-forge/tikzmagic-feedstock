@@ -10,20 +10,23 @@ source:
   sha256: 4e2373b8b04968b4e3cb5db798331027491db1a965dcba928a89ed2c9302311f
 
 build:
-  number: 0
+  number: 1
   noarch: python
-  script: "{{ PYTHON }} -m pip install . --no-deps -vv"
+  script: {{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation
 
 requirements:
   host:
-    - python >=3
+    - python {{ python_min }}
+    - setuptools
     - pip
     # - ipython
   run:
-    - python >=3
+    - python >={{ python_min }}
     - ipython
 
 test:
+  requires:
+    - python {{ python_min }}
   imports:
     - tikzmagic
 
